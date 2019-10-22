@@ -1,0 +1,31 @@
+{
+  "description": "Set config values by accessing secrets in Hashicorp Vault",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin",
+  "parameters": {
+    "server_url": {
+      "description": "The URL of the Vault server",
+      "type": "Optional[String]"
+    },
+    "auth": {
+      "description": "The method for authorizing with the Vault server and any necessary parameters",
+     "type": "Optional[Hash]"
+    },
+    "path": {
+      "description": "The path to the secrets engine",
+      "type": "String[1]"
+    },
+    "field": {
+      "description": "The specific secret being used",
+      "type": "Optional[String]"
+    },
+    "version": {
+      "description": "The version of the K/V engine",
+      "type": "Optional[Numeric]"
+    },
+    "cacert": {
+      "description": "Path to the CA certificate",
+      "type": "Optional[String[1]]"
+    }
+  }
+}

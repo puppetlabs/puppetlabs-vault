@@ -4,6 +4,7 @@ source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 ruby_version_segments = Gem::Version.new(RUBY_VERSION.dup).segments
 minor_version = ruby_version_segments[0..1].join('.')
+gem 'pdk', :git => 'https://github.com/puppetlabs/pdk'
 
 group :development do
   gem 'puppet'

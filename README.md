@@ -21,11 +21,7 @@ The Vault plugin supports several options:
 - `path`: The path to the secrets engine (required)
 - `field`: The specific secret being used (optional, defaults to a Ruby hash of all secrets at the `path`)
 - `version`: The version of the K/V engine (optional, defaults to 1)
-
-If Vault server uses TLS, you can use the following config to authenticate with the server:
-- `cacert`: Path to the CA certificate (optional)
-- `cert`: Path to the SSL certificate (optional)
-- `key`: Path to the SSL key (optional)
+- `cacert`: Path to the CA certificate (optional, required if using TLS)
 
 ### Authentication Methods
 
@@ -86,8 +82,6 @@ plugins:
   vault:
     server_url: https://127.0.0.1:8200
     cacert: /path/to/ca
-    cert: /path/to/cert
-    key: /path/to/key
     auth:
       method: token
       token: xxxxx-xxxxx

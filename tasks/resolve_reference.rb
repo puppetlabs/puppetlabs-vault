@@ -28,12 +28,6 @@ class Vault < TaskHelper
     "Accept" => "application/json"
   }.freeze
 
-  ENV_OPTS = {
-    server_url: ENV['VAULT_ADDR'],
-    auth: ENV['VAULT_TOKEN'],
-    cacert: ENV['VAULT_CACERT']
-  }.freeze
-
   def validate_options(opts)
     %i[server_url path].each do |key|
       unless opts[key]
@@ -44,11 +38,17 @@ class Vault < TaskHelper
 
   def task(opts)
     # Precedence: Inventory overrides config overrides env
-    merged = ENV_OPTS.merge(opts)
+    env_opts = {
+      server_url: ENV['VAULT_ADDR'],
+      cacert: ENV['VAULT_CACERT']
+    }
+
+    env_opts = env_opts.merge(auth: { method: 'token', token: ENV['VAULT_TOKEN'] }) if ENV['VAULT_TOKEN']
+    merged = env_opts.merge(opts)
 
     validate_options(merged)
     header = {
-      "X-Vault-Token" => request_token(merged[:auth], merged)
+      "X-Vault-Token" => merged.fetch(:auth, nil) ? request_token(merged[:auth], merged) : nil
     }
 
     # Handle the different versions of the API

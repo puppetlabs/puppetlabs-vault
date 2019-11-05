@@ -35,7 +35,7 @@ class Vault < TaskHelper
   }.freeze
 
   def validate_options(opts)
-    %i[server_url auth path].each do |key|
+    %i[server_url path].each do |key|
       unless opts[key]
         raise ValidationError, "Vault plugin requires #{key} to be configured"
       end

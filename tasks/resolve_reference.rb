@@ -43,7 +43,7 @@ class Vault < TaskHelper
       cacert: ENV['VAULT_CACERT']
     }
 
-    env_opts.merge(auth: { method: 'token', token: ENV['VAULT_TOKEN'] }) if ENV['VAULT_TOKEN']
+    env_opts = env_opts.merge(auth: { method: 'token', token: ENV['VAULT_TOKEN'] }) if ENV['VAULT_TOKEN']
     merged = env_opts.merge(opts)
 
     validate_options(merged)

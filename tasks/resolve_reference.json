@@ -27,5 +27,6 @@
       "description": "Path to the CA certificate",
       "type": "Optional[String[1]]"
     }
-  }
+  },
+  "private": true
 }

@@ -1,20 +1,32 @@
+## Release 0.3.1
+
+### Bug fixes
+
+* **Add missing dependency to module metadata**
+  ([#12](https://github.com/puppetlabs/puppetlabs-vault/pull/12))
+
+  The module metadata now includes `ruby_task_helper` as a dependency.
+
 ## Release 0.3.0
 
 ### New features
 
-* **Set `resolve_reference` task to private** ([#10](https://github.com/puppetlabs/puppetlabs-vault/pulls/10))
+* **Set `resolve_reference` task to private**
+  ([#10](https://github.com/puppetlabs/puppetlabs-vault/pull/10))
 
-    The `resolve_reference` task has been set to `private` so it no longer appears in UI lists.
+  The `resolve_reference` task has been set to `private` so it no longer appears
+  in UI lists.
 
 ## Release 0.2.2
 
 ### Bug fixes
 
-* **Make auth parameter optional** ([#8](https://github.com/puppetlabs/puppetlabs-vault/pulls/8))
+* **Make auth parameter optional**
+  ([#8](https://github.com/puppetlabs/puppetlabs-vault/pull/8))
 
-    Previously the `auth` parameter was a required key to use the Vault plugin. It's now optional,
-    enabling workflows such as connecting to a Vault agent which has it's own authentication with the
-    server.
+  Previously the `auth` parameter was a required key to use the Vault plugin.
+  It's now optional, enabling workflows such as connecting to a Vault agent
+  which has it's own authentication with the server.
 
 ## Release 0.1.0
 

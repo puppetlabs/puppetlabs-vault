@@ -20,6 +20,7 @@ minor_version = ruby_version_segments[0..1].join('.')
 group :development do
   gem "puppet-module-posix-default-r#{minor_version}", require: false, platforms: [:ruby]
   gem "puppet-module-posix-dev-r#{minor_version}",     require: false, platforms: [:ruby]
+  gem "pdk", *location_for(ENV['PDK_GEM_VERSION'])
   gem 'puppet', *location_for(ENV['PUPPET_GEM_VERSION'])
   # Pin puppet blacksmith to avoid failures in forge module push job
   gem "puppet-blacksmith", "4.1.2"

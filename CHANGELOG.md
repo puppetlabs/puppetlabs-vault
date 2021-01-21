@@ -1,3 +1,9 @@
+## Release 0.4.0
+
+### New features
+
+* **Bump maximum Puppet version to include 7.x** ([#16](https://github.com/puppetlabs/puppetlabs-vault/pull/16))
+
 ## Release 0.3.2
 
 ### Bug fixes

@@ -4,7 +4,7 @@
   "author": "Puppet, Inc.",
   "summary": "A task to access Bolt configuration from secrets stored in a Hashicorp Vault server",
   "license": "Apache-2.0",
-  "source": "git@github.com/puppetlabs/puppetlabs-vault",
+  "source": "https://github.com/puppetlabs/puppetlabs-vault",
   "project_page": "https://github.com/puppetlabs/puppetlabs-vault",
   "dependencies": [
     {

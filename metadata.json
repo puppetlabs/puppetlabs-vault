@@ -1,6 +1,6 @@
 {
   "name": "puppetlabs-vault",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "author": "Puppet, Inc.",
   "summary": "A task to access Bolt configuration from secrets stored in a Hashicorp Vault server",
   "license": "Apache-2.0",
@@ -60,7 +60,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.10.0 < 7.0.0"
+      "version_requirement": ">= 4.10.0 < 8.0.0"
     }
   ],
   "pdk-version": "1.14.0",

@@ -1,6 +1,6 @@
 {
   "name": "puppetlabs-vault",
-  "version": "0.4.1",
+  "version": "1.0.0",
   "author": "Puppet, Inc.",
   "summary": "A task to access Bolt configuration from secrets stored in a Hashicorp Vault server",
   "license": "Apache-2.0",
@@ -8,8 +8,8 @@
   "project_page": "https://github.com/puppetlabs/puppetlabs-vault",
   "dependencies": [
     {
-      "name":"puppetlabs-ruby_task_helper",
-      "version_requirement":">= 0.4.0 < 2.0.0"
+      "name": "puppetlabs-ruby_task_helper",
+      "version_requirement": ">= 0.4.0 < 2.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -60,10 +60,10 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.10.0 < 8.0.0"
+      "version_requirement": ">= 8.0.0 < 10.0.0"
     }
   ],
-  "pdk-version": "1.14.0",
-  "template-url": "https://github.com/puppetlabs/pdk-templates#1.14.0",
-  "template-ref": "1.14.0-0-g1bf3a4e"
+  "pdk-version": "3.6.1",
+  "template-url": "https://github.com/puppetlabs/pdk-templates.git#main",
+  "template-ref": "heads/main-0-gb7f9e32"
 }

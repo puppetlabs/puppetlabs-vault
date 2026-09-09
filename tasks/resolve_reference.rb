@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative '../../ruby_task_helper/files/task_helper'
+require_relative '../../ruby_task_helper/files/task_helper' unless Object.const_defined?(:TaskHelper)
 require 'json'
 require 'net/http'
 require 'openssl'

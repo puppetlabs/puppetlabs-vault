@@ -9,26 +9,26 @@
   "dependencies": [
     {
       "name": "puppetlabs-ruby_task_helper",
-      "version_requirement": ">= 0.4.0 < 2.0.0"
+      "version_requirement": ">= 0.4.0 < 3.0.0"
     }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "7"
+        "9"
       ]
     },
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "7"
+        "9"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "8"
+        "9"
       ]
     },
     {
@@ -40,20 +40,20 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "9"
+        "12"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "18.04"
+        "24.04"
       ]
     },
     {
       "operatingsystem": "windows",
       "operatingsystemrelease": [
-        "2019",
-        "10"
+        "2016",
+        "2019"
       ]
     }
   ],

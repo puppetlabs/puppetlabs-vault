@@ -1,0 +1,59 @@
+# Changelog Archive
+
+Release notes prior to [v1.0.0](CHANGELOG.md) (Puppet 9 / PDK modernization), generated before this
+module adopted the [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)-based automated release
+process. Kept for historical reference only; not parsed by the release tooling.
+
+## [v0.4.1]()
+
+### New features
+
+* **Bump ruby_task_helper upper bound to < 2.0.0** ([#19](https://github.com/puppetlabs/puppetlabs-vault/pull/19))
+
+## Release 0.4.0
+
+### New features
+
+* **Bump maximum Puppet version to include 7.x** ([#16](https://github.com/puppetlabs/puppetlabs-vault/pull/16))
+
+## Release 0.3.2
+
+### Bug fixes
+
+* **Add PDK as a gem dependency**
+
+  PDK is now a gem dependency for the module release pipeline
+
+## Release 0.3.1
+
+### Bug fixes
+
+* **Add missing dependency to module metadata**
+  ([#12](https://github.com/puppetlabs/puppetlabs-vault/pull/12))
+
+  The module metadata now includes `ruby_task_helper` as a dependency.
+
+## Release 0.3.0
+
+### New features
+
+* **Set `resolve_reference` task to private**
+  ([#10](https://github.com/puppetlabs/puppetlabs-vault/pull/10))
+
+  The `resolve_reference` task has been set to `private` so it no longer appears
+  in UI lists.
+
+## Release 0.2.2
+
+### Bug fixes
+
+* **Make auth parameter optional**
+  ([#8](https://github.com/puppetlabs/puppetlabs-vault/pull/8))
+
+  Previously the `auth` parameter was a required key to use the Vault plugin.
+  It's now optional, enabling workflows such as connecting to a Vault agent
+  which has it's own authentication with the server.
+
+## Release 0.1.0
+
+This is the initial release.

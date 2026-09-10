@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../../tasks/resolve_reference.rb'
+require_relative '../../tasks/resolve_reference'
 
 describe Vault do
   let(:server_url) { 'http://127.0.0.1:8200' }
@@ -13,44 +13,44 @@ describe Vault do
       server_url: server_url,
       auth: {
         method: 'token',
-        token: 'secret'
+        token: 'secret',
       },
       path: path,
-      field: 'foo'
+      field: 'foo',
     }
   end
 
   let(:response) do
     {
       'data' => {
-        'foo' => 'bar'
-      }
+        'foo' => 'bar',
+      },
     }
   end
 
   it 'errors when missing cacert and using https' do
     config[:server_url] = 'https://127.0.0.1:8200'
     uri = subject.get_uri(config)
-    expect { subject.get_client(uri, config) }.to raise_error(Vault::ValidationError, /https/)
+    expect { subject.get_client(uri, config) }.to raise_error(Vault::ValidationError, %r{https})
   end
 
   context 'when validating keys' do
     it 'errors when missing required inventory config key' do
       config.delete(:path)
-      expect { subject.validate_options(config) }.to raise_error(Vault::ValidationError, /path/)
+      expect { subject.validate_options(config) }.to raise_error(Vault::ValidationError, %r{path})
     end
 
     it 'errors when missing required auth method key' do
       config[:auth].delete(:token)
-      expect { subject.validate_auth(config, %i[token]) }
-        .to raise_error(Vault::ValidationError, /token/)
+      expect { subject.validate_auth(config, [:token]) }
+        .to raise_error(Vault::ValidationError, %r{token})
     end
 
     it 'errors when using unknown auth method' do
       auth = config[:auth]
       auth[:method] = 'foo'
       expect { subject.request_token(auth, config) }.to raise_error(
-        Vault::ValidationError, /foo/
+        Vault::ValidationError, %r{foo}
       )
     end
   end
@@ -76,7 +76,7 @@ describe Vault do
     it 'errors when response is missing field from inventory config' do
       config[:field] = 'baz'
       expect { subject.parse_response(response, config) }.to raise_error(
-        TaskHelper::Error, /baz/
+        TaskHelper::Error, %r{baz}
       )
     end
 

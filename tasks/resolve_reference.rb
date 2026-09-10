@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative '../../ruby_task_helper/files/task_helper.rb'
+require_relative '../../ruby_task_helper/files/task_helper' unless Object.const_defined?(:TaskHelper)
 require 'json'
 require 'net/http'
 require 'openssl'
@@ -10,7 +10,7 @@ class Vault < TaskHelper
   class VaultHTTPError < TaskHelper::Error
     def initialize(response)
       err = JSON.parse(response.body)['errors']
-      m = String.new("#{response.code} \"#{response.msg}\"")
+      m = "#{response.code} \"#{response.msg}\""
       m << ": #{err.join(';')}" unless err.nil?
       super(m, 'bolt.plugin/vault-http-error')
     end
@@ -24,23 +24,21 @@ class Vault < TaskHelper
 
   # Default header for all requests, including auth methods
   DEFAULT_HEADER = {
-    "Content-Type" => "application/json",
-    "Accept" => "application/json"
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
   }.freeze
 
   def validate_options(opts)
-    %i[server_url path].each do |key|
-      unless opts[key]
-        raise ValidationError, "Vault plugin requires #{key} to be configured"
-      end
+    [:server_url, :path].each do |key|
+      raise ValidationError, "Vault plugin requires #{key} to be configured" unless opts[key]
     end
   end
 
   def task(opts)
     # Precedence: Inventory overrides config overrides env
     env_opts = {
-      server_url: ENV['VAULT_ADDR'],
-      cacert: ENV['VAULT_CACERT']
+      server_url: ENV.fetch('VAULT_ADDR', nil),
+      cacert: ENV.fetch('VAULT_CACERT', nil),
     }
 
     env_opts = env_opts.merge(auth: { method: 'token', token: ENV['VAULT_TOKEN'] }) if ENV['VAULT_TOKEN']
@@ -48,7 +46,7 @@ class Vault < TaskHelper
 
     validate_options(merged)
     header = {
-      "X-Vault-Token" => merged.fetch(:auth, nil) ? request_token(merged[:auth], merged) : nil
+      'X-Vault-Token' => merged.fetch(:auth, nil) ? request_token(merged[:auth], merged) : nil,
     }
 
     # Handle the different versions of the API
@@ -58,13 +56,13 @@ class Vault < TaskHelper
     end
 
     response = request(:Get, get_uri(merged), merged, header: header)
-    { "value" => parse_response(response, merged) }
+    { 'value' => parse_response(response, merged) }
   end
 
   # Request uri - built up from Vault server url and secrets path
   def get_uri(opts, path = nil)
     path ||= opts[:path]
-    URI.parse(File.join(opts[:server_url], "v1", path))
+    URI.parse(File.join(opts[:server_url], 'v1', path))
   end
 
   # Configure the http/s client
@@ -73,9 +71,8 @@ class Vault < TaskHelper
 
     if uri.scheme == 'https'
       cacert = opts[:cacert]
-      unless cacert
-        raise ValidationError, "Vault plugin requires cacert to be configured when connecting over https"
-      end
+      raise ValidationError, 'Vault plugin requires cacert to be configured when connecting over https' unless cacert
+
       client.use_ssl = true
       client.ssl_version = :TLSv1_2
       client.ca_file = cacert
@@ -102,7 +99,7 @@ class Vault < TaskHelper
     rescue StandardError => e
       raise TaskHelper::Error.new(
         "Failed to connect to #{uri}: #{e.message}",
-        'CONNECT_ERROR'
+        'CONNECT_ERROR',
       )
     end
 
@@ -123,9 +120,8 @@ class Vault < TaskHelper
            end
 
     if opts[:field]
-      unless data[opts[:field]]
-        raise ValidationError, "Unknown secrets field: #{opts[:field]}"
-      end
+      raise ValidationError, "Unknown secrets field: #{opts[:field]}" unless data[opts[:field]]
+
       data[opts[:field]]
     else
       data
@@ -147,22 +143,23 @@ class Vault < TaskHelper
   def validate_auth(auth, required_keys)
     required_keys.each do |key|
       next if auth[key]
+
       raise ValidationError, "Expected key in #{auth[:method]} auth method: #{key}"
     end
   end
 
   # Authenticate with Vault using the 'Token' auth method
   def auth_token(auth)
-    validate_auth(auth, %i[token])
+    validate_auth(auth, [:token])
     auth[:token]
   end
 
   # Authenticate with Vault using the 'Userpass' auth method
   def auth_userpass(auth, opts)
-    validate_auth(auth, %i[user pass])
+    validate_auth(auth, [:user, :pass])
     path = "auth/userpass/login/#{auth[:user]}"
     uri = get_uri(opts, path)
-    data = { "password" => auth[:pass] }.to_json
+    data = { 'password' => auth[:pass] }.to_json
 
     request(:Post, uri, opts, data: data)['auth']['client_token']
   end

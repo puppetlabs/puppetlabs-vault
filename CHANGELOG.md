@@ -1,5 +1,15 @@
 # Changelog
 
+## Release 1.0.0
+
+### Changed
+
+* **Add support for Puppet 9**
+
+  Raises the maximum supported Puppet version to `< 10.0.0` (`puppet`
+  requirement is now `>= 8.0.0 < 10.0.0`). Major version bump as part of the
+  Bolt/Puppet 9 migration.
+
 ## Release 0.4.1
 
 ### New features
